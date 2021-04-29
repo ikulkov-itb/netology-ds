@@ -1,0 +1,14 @@
+Насколько понял описание дата-сета (https://support.google.com/analytics/answer/3437719?hl=ru), получается вот такой запрос:
+
+SELECT
+    trafficSource.source, sum(totals.hits) as cnt
+FROM
+    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+WHERE 1 = 1
+    AND _TABLE_SUFFIX BETWEEN '20160801' AND '20161231'
+    AND trafficSource.source not in ('(direct)', 'Partners')
+group by trafficSource.source
+ORDER BY cnt desc
+limit 10;
+
+Результат выборки в файле results.csv
