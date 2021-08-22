@@ -1,0 +1,21 @@
+# List of stages for jobs, and their order of execution
+stages:
+  - build
+  - test
+
+Artifact build:
+   stage: build
+   script:
+       - echo "Building"
+       - test -d ~/build && "Directory exists" || mkdir ~/build
+       - touch ~/build/info.txt
+   tags:
+       - netology
+
+Artifact test:
+   stage: test
+   script:
+       - echo "Testing"
+       - test -f ~/build/info.txt && echo "File created" || echo "File not created"
+   tags:
+       - netology
